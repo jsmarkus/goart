@@ -91,37 +91,45 @@ func (r *Raster) DrawTriangle(x1, y1, x2, y2, x3, y3 uint32) {
 		return
 	}
 
-	var xb, xe float32
+	var xb, xe uint32
 
-	//TODO: use constants
-	//TODO: convert to integer algorithm
+	for scanline := y1; scanline < y2; scanline++ {
+		if x2 > x1 {
+			xb = x2 - (y2-scanline)*(x2-x1)/(y2-y1)
+		} else {
+			xb = x2 + (y2-scanline)*(x1-x2)/(y2-y1)
+		}
 
-	fy1 := float32(y1)
-	fy2 := float32(y2)
-	fy3 := float32(y3)
-	fx1 := float32(x1)
-	fx2 := float32(x2)
-	fx3 := float32(x3)
-
-	for scanline := fy1; scanline < fy2; scanline++ {
-		xb = fx2 + (scanline-fy2)*(fx1-fx2)/(fy1-fy2)
-		xe = fx3 + (scanline-fy3)*(fx1-fx3)/(fy1-fy3)
+		if x3 > x1 {
+			xe = x3 - (y3-scanline)*(x3-x1)/(y3-y1)
+		} else {
+			xe = x3 + (y3-scanline)*(x1-x3)/(y3-y1)
+		}
 
 		if xb > xe {
 			xb, xe = xe, xb
 		}
 
-		r.DrawLine(uint32(xb), uint32(scanline), uint32(xe), uint32(scanline))
+		r.DrawLine(xb, scanline, xe, scanline)
 	}
 
-	for scanline := fy2; scanline < fy3; scanline++ {
-		xb = fx3 + (scanline-fy3)*(fx2-fx3)/(fy2-fy3)
-		xe = fx3 + (scanline-fy3)*(fx1-fx3)/(fy1-fy3)
+	for scanline := y2; scanline < y3; scanline++ {
+		if x2 > x3 {
+			xb = x3 + (y3-scanline)*(x2-x3)/(y3-y2)
+		} else {
+			xb = x3 - (y3-scanline)*(x3-x2)/(y3-y2)
+		}
+
+		if x1 > x3 {
+			xe = x3 + (y3-scanline)*(x1-x3)/(y3-y1)
+		} else {
+			xe = x3 - (y3-scanline)*(x3-x1)/(y3-y1)
+		}
 
 		if xb > xe {
 			xb, xe = xe, xb
 		}
 
-		r.DrawLine(uint32(xb), uint32(scanline), uint32(xe), uint32(scanline))
+		r.DrawLine(xb, scanline, xe, scanline)
 	}
 }

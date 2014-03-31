@@ -15,6 +15,8 @@ func main() {
 	a.SetColor(Color{0xAA, 0xAA, 0xAA})
 	//a.DrawPoint(0, 0)
 	// fmt.Printf("%#v", a)
+	//for i := 0; i < 1000000; i++ {
 	a.DrawTriangle(25, 0, 49, 3, 0, 9)
+	//}
 	debug.PrintRaster(a)
 }
