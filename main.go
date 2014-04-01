@@ -12,4 +12,6 @@ func main() {
 	var gnm *ga.GenomeInt = ga.NewGenomeInt(10)
 	fmt.Printf("%#v\n", gnm)
 	fmt.Printf("%#v\n", gnm.Len())
+	gnm.Randomize()
+	fmt.Printf("%#v\n", gnm)
 }
