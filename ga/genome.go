@@ -2,5 +2,6 @@ package ga
 
 type Genome interface {
 	Randomize()
-	Len() int
+	Len() uint32
+	Crossover(g Genome, index uint32) Genome
 }
