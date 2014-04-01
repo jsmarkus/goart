@@ -1,8 +1,7 @@
-package debug
+package graphics
 
 import (
 	"fmt"
-	. "github.com/jsmarkus/goart/raster"
 )
 
 func PrintRaster(r *Raster) {

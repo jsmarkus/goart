@@ -1,8 +1,4 @@
-package raster
-
-import (
-	. "github.com/jsmarkus/goart/color"
-)
+package graphics
 
 type Raster struct {
 	buffer []Color
