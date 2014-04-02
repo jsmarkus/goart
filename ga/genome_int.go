@@ -1,6 +1,7 @@
 package ga
 
 import (
+	"fmt"
 	"math/rand"
 )
 
@@ -18,6 +19,28 @@ func NewGenomeInt(length uint32) *GenomeInt {
 func (this *GenomeInt) Randomize() {
 	for n, _ := range this.Gene {
 		this.Gene[n] = uint32(rand.Int31n(GenomeIntMaxValue))
+	}
+}
+
+func (this *GenomeInt) Mutate(strength, probability float32) {
+	for n, g := range this.Gene {
+		if rand.Float32() < probability {
+			increment := uint32(strength * GenomeIntMaxValue * rand.Float32())
+			fmt.Printf("INCR=%d\n", increment)
+			if rand.Float32() < 0.5 {
+				if g > increment {
+					this.Gene[n] -= increment
+				} else {
+					this.Gene[n] = 0
+				}
+			} else {
+				if GenomeIntMaxValue-increment > g {
+					this.Gene[n] += increment
+				} else {
+					this.Gene[n] = GenomeIntMaxValue
+				}
+			}
+		}
 	}
 }
 

@@ -33,3 +33,15 @@ func TestCrossover(t *testing.T) {
 
 	t.Logf("%#v", g3)
 }
+
+func rateDifference(g1, g2 *GenomeInt) (diffQuantity, maxDeviation int) {
+	//TODO
+}
+
+func TestMutate(t *testing.T) {
+	g := NewGenomeInt(100)
+	g.Randomize()
+	fmt.Printf("%v\n", g.Gene)
+	g.Mutate(1e-7, 0.6)
+	fmt.Printf("%v\n", g.Gene)
+}
