@@ -56,3 +56,11 @@ func (this *GenomeInt) Crossover(g Genome, index uint32) Genome {
 	//newGenome.Gene = genes
 	return newGenome
 }
+
+func (this *GenomeInt) Copy() Genome {
+	genes := make([]uint32, this.Len())
+	copy(genes, this.Gene)
+	newGenome := NewGenomeInt(this.Len())
+	newGenome.Gene = genes
+	return newGenome
+}

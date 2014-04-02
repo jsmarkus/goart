@@ -34,14 +34,36 @@ func TestCrossover(t *testing.T) {
 	t.Logf("%#v", g3)
 }
 
-func rateDifference(g1, g2 *GenomeInt) (diffQuantity, maxDeviation int) {
-	//TODO
+func rateDifference(gn1, gn2 *GenomeInt) (diffQuantity, maxDeviation int) {
+	maxDeviation = 0
+	diffQuantity = 0
+	for i, g := range gn1.Gene {
+		dev := int(g) - int(gn2.Gene[i])
+		if dev < 0 {
+			dev = -dev
+		}
+		if dev != 0 {
+			diffQuantity++
+		}
+		if maxDeviation < int(dev) {
+			maxDeviation = int(dev)
+		}
+	}
+	return
 }
 
 func TestMutate(t *testing.T) {
-	g := NewGenomeInt(100)
+	g := NewGenomeInt(100000)
 	g.Randomize()
-	fmt.Printf("%v\n", g.Gene)
-	g.Mutate(1e-7, 0.6)
-	fmt.Printf("%v\n", g.Gene)
+	g2 := g.Copy().(*GenomeInt)
+	g.Mutate(1e-7, 0.02)
+
+	diffQuantity, maxDeviation := rateDifference(g, g2)
+	fmt.Printf("%d : %d\n", diffQuantity, maxDeviation)
+	if diffQuantity < 1900 || diffQuantity > 2100 {
+		t.Errorf("Quantity of mutated genes (%d) differs from the expected (1900-2100)", diffQuantity)
+	}
+	if maxDeviation < 90 || maxDeviation > 100 {
+		t.Errorf("Max deviation value (%d) differs from the expected (90-100)", maxDeviation)
+	}
 }
