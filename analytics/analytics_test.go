@@ -7,16 +7,24 @@ import (
 
 func TestAsymmetry(t *testing.T) {
 	rst := graphics.CreateRaster(4, 4)
-	rst.SetColor(graphics.Color{5, 60, 71})
-	if Asymmetry(rst) > 0 {
+	rst.SetColor(graphics.Color{255, 255, 255})
+	var as uint32
+
+	as = Asymmetry(rst)
+	t.Log(as)
+	if as > 0 {
 		t.Error("assymetry is wrong")
 	}
 	rst.DrawPoint(2, 1)
-	if Asymmetry(rst) <= 0 {
+	as = Asymmetry(rst)
+	t.Log(as)
+	if as <= 0 {
 		t.Error("assymetry is wrong")
 	}
 	rst.DrawPoint(1, 1)
-	if Asymmetry(rst) > 0 {
+	as = Asymmetry(rst)
+	t.Log(as)
+	if as > 0 {
 		t.Error("assymetry is wrong")
 	}
 }
