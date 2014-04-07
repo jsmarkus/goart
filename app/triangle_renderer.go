@@ -21,6 +21,7 @@ func NewTriangleRenderer(genome *ga.GenomeInt, raster *graphics.Raster) *Triangl
 }
 
 func (this *TriangleRenderer) Render() {
+	this.Raster.Clear()
 	var colorDivider = uint32(ga.GenomeIntMaxValue) / 255
 	var xDivider = uint32(ga.GenomeIntMaxValue) / this.Raster.Width
 	var yDivider = uint32(ga.GenomeIntMaxValue) / this.Raster.Height

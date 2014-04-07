@@ -68,6 +68,16 @@ func (r *Raster) DrawLine(x1, y1, x2, y2 uint32) {
 	}
 }
 
+func (r *Raster) Clear() {
+	var x, y uint32
+	for x = 0; x < r.Width; x++ {
+		for y = 0; y < r.Height; y++ {
+			offset := r.xyToOffset(x, y)
+			r.buffer[offset] = Color{0, 0, 0}
+		}
+	}
+}
+
 func (r *Raster) DrawTriangle(x1, y1, x2, y2, x3, y3 uint32) {
 	////http://www.gamedev.ru/code/forum/?id=95311
 	if y1 > y2 {
