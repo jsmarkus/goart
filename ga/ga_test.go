@@ -67,3 +67,10 @@ func TestMutate(t *testing.T) {
 		t.Errorf("Max deviation value (%d) differs from the expected (90-100)", maxDeviation)
 	}
 }
+
+func TestGeneration(t *testing.T) {
+	gnr := NewGeneration(3, 100, NewGenomeIntAsGenome)
+	t.Log(gnr.Genome[2])
+	gnr.Mutate(1e-7, 0.02, 0.7)
+	t.Log(gnr.Genome[2])
+}

@@ -14,6 +14,9 @@ func NewGenomeInt(length uint32) *GenomeInt {
 	var g []uint32 = make([]uint32, length)
 	return &GenomeInt{Gene: g}
 }
+func NewGenomeIntAsGenome(length uint32) Genome {
+	return NewGenomeInt(length)
+}
 
 func (this *GenomeInt) Randomize() {
 	for n, _ := range this.Gene {

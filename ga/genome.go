@@ -7,3 +7,5 @@ type Genome interface {
 	Mutate(strength, probability float32)
 	Copy() Genome
 }
+
+type GenomeConstructor func(length uint32) Genome
