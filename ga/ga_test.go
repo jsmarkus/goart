@@ -73,4 +73,6 @@ func TestGeneration(t *testing.T) {
 	t.Log(gnr.Genome[2])
 	gnr.Mutate(1e-7, 0.02, 0.7)
 	t.Log(gnr.Genome[2])
+	gnr.Randomize()
+	t.Log(gnr.Genome[2])
 }

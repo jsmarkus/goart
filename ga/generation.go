@@ -28,3 +28,8 @@ func (this *GenerationS) Mutate(strength, geneProbability, genomeProbability flo
 		}
 	}
 }
+func (this *GenerationS) Randomize() {
+	for _, gnm := range this.Genome {
+		gnm.Randomize()
+	}
+}
